@@ -33,7 +33,14 @@
       display:flex; align-items:center; gap:16px; justify-content:space-between; margin-bottom:24px
     }
     .brand{display:flex; align-items:center; gap:12px}
-    .logo{width:42px; height:42px; border-radius:12px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow: var(--shadow)}
+    /* .logo{width:42px; height:42px; border-radius:12px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow: var(--shadow)} */
+   .logo {
+          width:42px;
+          height:42px;
+          border-radius:12px;       /* keeps rounded corners */
+          object-fit:cover;         /* makes sure the image fills the box nicely */
+          box-shadow: var(--shadow);
+        }
     .title{font-weight:700; letter-spacing:.3px}
     .badge{font-size:12px; color:var(--muted); border:1px solid #1f2937; padding:6px 10px; border-radius:999px; backdrop-filter:saturate(140%)}
 
@@ -55,6 +62,10 @@
 
     footer{margin:28px 0 8px; color:var(--muted); font-size:13px; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap}
 
+    /* Responsive video embed */
+    .video{position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; margin-top:18px}
+    .video iframe{position:absolute; top:0; left:0; width:100%; height:100%}
+
     @media (max-width: 900px){
       .hero{grid-template-columns: 1fr}
       .cards{grid-template-columns: 1fr 1fr}
@@ -64,21 +75,25 @@
       .hero h1{font-size:34px}
     }
   </style>
+
+<link rel="icon" type="image/png" href="favicon.png" />
+
+
 </head>
 <body>
   <div class="wrap">
     <header>
       <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
+        <img src="favicon.png" alt="Entropy Engine Logo" class="logo" />
         <div>
           <div class="title">Entropy Engine</div>
           <div class="badge" title="Minimum Viable Kiosk">MVP · Info Kiosk</div>
         </div>
       </div>
       <nav class="cta">
-        <!-- TODO: replace # with your canonical links -->
-        <a class="btn" href="#" target="_blank" rel="noopener">Docs</a>
-        <a class="btn" href="#" target="_blank" rel="noopener">GitHub</a>
+        <!-- Top-right quick links (optional) -->
+        <a class="btn" href="https://github.com/henry-pozzetta/entropy-engine-starter-kit/tree/main/docs" target="_blank" rel="noopener">Docs</a>
+        <a class="btn" href="https://github.com/henry-pozzetta/entropy-engine-starter-kit" target="_blank" rel="noopener">GitHub</a>
       </nav>
     </header>
 
@@ -95,27 +110,11 @@
             <span>EE Coach GPT</span>
             <span class="sm">(ask anything)</span>
           </a>
+          <a class="btn" href="#video" rel="noopener"><span>🎥 Watch Video</span></a>
         </div>
       </div>
-      <div aria-hidden="true">
-        <!-- Lightweight placeholder illustration -->
-        <svg viewBox="0 0 300 220" width="100%" height="220" role="img" aria-label="Arrow demo" style="border-radius:14px; background: linear-gradient(180deg, rgba(2,6,23,.5), rgba(15,23,42,.5)); border:1px solid #1f2937">
-          <defs>
-            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#22d3ee"/>
-              <stop offset="100%" stop-color="#60a5fa"/>
-            </linearGradient>
-          </defs>
-          <g transform="translate(150,110)">
-            <line x1="-120" y1="0" x2="120" y2="0" stroke="#253044" stroke-width="1"/>
-            <line x1="0" y1="-80" x2="0" y2="80" stroke="#253044" stroke-width="1"/>
-            <line x1="-80" y1="60" x2="80" y2="-60" stroke="#253044" stroke-width="1"/>
-            <g id="arrow">
-              <line x1="0" y1="0" x2="70" y2="-30" stroke="url(#g1)" stroke-width="4"/>
-              <polygon points="70,-30 54,-24 60,-44" fill="url(#g1)" />
-            </g>
-          </g>
-        </svg>
+      <div class="video" id="video">
+        <iframe src="https://www.youtube.com/embed/X0-qOgKCiEc?list=PLAIfO87ElWVF0Fc-dmJgOSynk6qKoIqm8" title="Entropy Engine Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
     </section>
 
@@ -136,8 +135,7 @@
         <h3>Medium</h3>
         <p>Short explainers and announcements.</p>
       </a>
-      <a class="card" href="https://www.linkedin.com/pulse/why-information-entropy-your-next-competitive-henry-e-pozzetta--zbnme/?trackingId=F0iRuDxvQWyHPq6kQTGyUQ%3D%3D
-      " target="_blank" rel="noopener">
+      <a class="card" href="https://www.linkedin.com/pulse/why-information-entropy-your-next-competitive-henry-e-pozzetta--zbnme/?trackingId=F0iRuDxvQWyHPq6kQTGyUQ%3D%3D" target="_blank" rel="noopener">
         <h3>LinkedIn</h3>
         <p>Company updates and professional posts.</p>
       </a>
