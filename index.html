@@ -77,6 +77,22 @@
       .hero h1{font-size:34px}
     }
   </style>
+  <style>
+  .aquarium { margin: 2rem auto; max-width: 1200px; }
+  .aquarium-embed { position: relative; width: 100%; aspect-ratio: 16 / 9; }
+  .aquarium-embed iframe {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    border: 0; border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    background: #0b0d12; /* nice while loading */
+  }
+  .aquarium-controls { display: flex; gap: .5rem; align-items: center; margin-top: .5rem; flex-wrap: wrap; }
+  .aquarium-controls button, .aquarium-controls .open-full {
+    padding: .5rem .75rem; border-radius: 10px; border: 1px solid #2a3346; background: #121622; color: #e8edf3;
+    text-decoration: none; cursor: pointer; font-size: .95rem;
+  }
+  .aquarium-controls button:hover, .aquarium-controls .open-full:hover { background: #1a2030; }
+</style>
 
 <link rel="icon" type="image/png" href="favicon.png" />
 
@@ -119,6 +135,30 @@
         <iframe src="https://www.youtube.com/embed/X0-qOgKCiEc?list=PLAIfO87ElWVF0Fc-dmJgOSynk6qKoIqm8" title="Entropy Engine Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
     </section>
+
+    <section class="aquarium">
+  <h2>Entropy Aquarium</h2>
+
+  <div class="aquarium-embed">
+    <iframe
+      id="aquarium-frame"
+      src="/docs/kiosk.html?src=wikipedia_rc&hz=12"
+      title="Entropy Aquarium"
+      loading="lazy"
+      allowfullscreen
+      referrerpolicy="no-referrer"
+      frameborder="0">
+    </iframe>
+  </div>
+
+  <div class="aquarium-controls">
+    <button data-src="synthetic"      data-hz="15">Synthetic</button>
+    <button data-src="wikipedia_rc"   data-hz="12">Wikipedia</button>
+    <button data-src="bitstamp_btcusd" data-hz="20">Bitstamp</button>
+    <button data-src="user_input"     data-hz="30">You</button>
+    <a class="open-full" href="/docs/kiosk.html?src=synthetic&hz=15" target="_blank">Open full screen ↗</a>
+  </div>
+</section>
 
     <section class="cards" aria-label="Destinations">
       <a class="card" href="https://github.com/henry-pozzetta/entropy-engine-starter-kit/releases" target="_blank" rel="noopener">
@@ -186,6 +226,20 @@
     </footer>
   </div>
 
+  <script>
+  // Simple source switcher for the iframe
+  (function () {
+    const frame = document.getElementById('aquarium-frame');
+    const base  = '/docs/kiosk.html';
+    document.querySelector('.aquarium-controls').addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-src]');
+      if (!btn) return;
+      const src = btn.getAttribute('data-src');
+      const hz  = btn.getAttribute('data-hz') || '15';
+      frame.src = `${base}?src=${encodeURIComponent(src)}&hz=${encodeURIComponent(hz)}`;
+    });
+  })();
+</script>
   <script>
     // Set year
     document.getElementById('yr').textContent = new Date().getFullYear();
